@@ -7,11 +7,17 @@ use yii\helpers\Url;
 
 class GridPageSize extends Widget
 {
-
 	/**
 	 * @var string
 	 */
 	public $pjaxId;
+
+	/**
+	 * Default - Url::to(['grid-page-size'])
+	 *
+	 * @var string
+	 */
+	public $url;
 
 	/**
 	 * @var array
@@ -49,6 +55,11 @@ class GridPageSize extends Widget
 		if ( ! $this->dropDownOptions )
 		{
 			$this->dropDownOptions = [5=>5, 10=>10, 20=>20, 50=>50, 100=>100, 200=>200];
+		}
+
+		if ( ! $this->url )
+		{
+			$this->url = Url::to(['grid-page-size']);
 		}
 	}
 
