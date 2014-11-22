@@ -17,5 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Clear filters' => 'Очистить фильтры',
     'Records per page' => 'Записей на странице',
 ];
