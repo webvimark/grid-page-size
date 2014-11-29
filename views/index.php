@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\web\View;
 
 ?>
-<div class="form-inline pull-right" style="margin-top: -5px">
+<div class="form-inline pull-right">
 	<?php if ( $this->context->enableClearFilters ): ?>
 
 		<span style="display: none" id="<?= ltrim($this->context->gridId, '#') ?>-clear-filters-btn" class="btn btn-sm btn-default">
