@@ -70,25 +70,8 @@ class GridPageSize extends Widget
 	public function init()
 	{
 		parent::init();
-		$this->registerTranslations();
 
 		$this->text = $this->text ? $this->text : GridPageSize::t('app', 'Records per page');
-	}
-
-	/**
-	 * Multilingual support
-	 */
-	public function registerTranslations()
-	{
-		$i18n = Yii::$app->i18n;
-		$i18n->translations['widgets/GridPageSize/*'] = [
-			'class' => 'yii\i18n\PhpMessageSource',
-			'sourceLanguage' => 'en-US',
-			'basePath' => __DIR__ . '/messages',
-			'fileMap' => [
-				'widgets/GridPageSize/app' => 'app.php',
-			],
-		];
 	}
 
 	/**
@@ -101,6 +84,18 @@ class GridPageSize extends Widget
 	 */
 	public static function t($category, $message, $params = [], $language = null)
 	{
+		if ( !isset(Yii::$app->i18n->translations['widgets/GridPageSize/*']) )
+		{
+			Yii::$app->i18n->translations['widgets/GridPageSize/*'] = [
+				'class' => 'yii\i18n\PhpMessageSource',
+				'sourceLanguage' => 'en-US',
+				'basePath' => __DIR__ . '/messages',
+				'fileMap' => [
+					'widgets/GridPageSize/app' => 'app.php',
+				],
+			];
+		}
+
 		return Yii::t('widgets/GridPageSize/' . $category, $message, $params, $language);
 	}
 
