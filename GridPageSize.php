@@ -3,6 +3,7 @@ namespace webvimark\extensions\GridPageSize;
 
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use Yii;
 
@@ -63,6 +64,12 @@ class GridPageSize extends Widget
 	 * @var string
 	 */
 	public $gridId;
+
+	/**
+	 * @var array additional options to be passed to the pjax JS plugin. Please refer to the
+	 * [pjax project page](https://github.com/yiisoft/jquery-pjax) for available options.
+	 */
+	public $clientOptions;
 
 	/**
 	 * Multilingual support
@@ -153,12 +160,17 @@ class GridPageSize extends Widget
 	 */
 	protected function js()
 	{
+		$options = ['container' => $this->pjaxId];
+		if( $this->clientOptions ){
+			$options = ArrayHelper::merge($options, $this->clientOptions);
+		}
+		$options = json_encode($options);
 		$js = <<<JS
 			$('$this->domContainer').off('change', '[name="grid-page-size"]').on('change', '[name="grid-page-size"]', function () {
 				var _t = $(this);
 				$.post('$this->url', { 'grid-page-size': _t.val() })
 					.done(function(){
-						$.pjax.reload({container: '$this->pjaxId'})
+						$.pjax.reload($options);
 					});
 			});
 JS;
