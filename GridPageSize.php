@@ -5,6 +5,7 @@ use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 use Yii;
 
 class GridPageSize extends Widget
@@ -41,7 +42,7 @@ class GridPageSize extends Widget
 	/**
 	 * @var array
 	 */
-	public $dropDownOptions;
+	public $dropDownOptions = [5, 10, 20, 50, 100, 200];
 
 	/**
 	 * Text "Records per page"
@@ -139,9 +140,8 @@ class GridPageSize extends Widget
 
 		$this->gridId = '#' . ltrim($this->gridId, '#');
 
-		if ( ! $this->dropDownOptions )
-		{
-			$this->dropDownOptions = [5=>5, 10=>10, 20=>20, 50=>50, 100=>100, 200=>200];
+		if(ArrayHelper::isIndexed($this->dropDownOptions)) {
+			$this->dropDownOptions = array_combine($this->dropDownOptions, $this->dropDownOptions);
 		}
 
 		if ( ! $this->url )
