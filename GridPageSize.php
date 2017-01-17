@@ -71,6 +71,8 @@ class GridPageSize extends Widget
 	 */
 	public $clientOptions;
 
+	public $clearFilterDisabledClass = 'hidden';
+
 	/**
 	 * Multilingual support
 	 */
@@ -204,11 +206,11 @@ JS;
 
 				if ( showClearFiltersButton )
 				{
-					clearFiltersBtn.show();
+					clearFiltersBtn.removeClass('$this->clearFilterDisabledClass');
 				}
 				else
 				{
-					clearFiltersBtn.hide();
+					clearFiltersBtn.addClass('$this->clearFilterDisabledClass');
 				}
 			}
 
